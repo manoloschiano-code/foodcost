@@ -163,19 +163,29 @@
                 <div class="bg-white rounded-lg shadow p-6">
                     <h2 class="text-xl font-bold mb-4">Ordini Recenti</h2>
                     <div id="ordersList" class="space-y-2">
-                        <div class="p-3 bg-gray-50 rounded">
-                            <div class="flex justify-between">
-                                <span class="font-medium">BIANCHI - Pollo 10kg</span>
-                                <span class="font-semibold">€125.00</span>
+                        <div class="p-3 bg-gray-50 rounded" id="order-1">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="font-medium">BIANCHI - Pollo 10kg</span>
+                                    <span class="text-sm text-gray-500 block">Lugano - 21/08/2025</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="font-semibold">€125.00</span>
+                                    <button onclick="deleteOrder('order-1')" class="text-red-500 hover:text-red-700 font-bold text-xl">×</button>
+                                </div>
                             </div>
-                            <span class="text-sm text-gray-500">Lugano - 21/08/2025</span>
                         </div>
-                        <div class="p-3 bg-gray-50 rounded">
-                            <div class="flex justify-between">
-                                <span class="font-medium">FOODEX - Riso 20kg</span>
-                                <span class="font-semibold">€56.00</span>
+                        <div class="p-3 bg-gray-50 rounded" id="order-2">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="font-medium">FOODEX - Riso 20kg</span>
+                                    <span class="text-sm text-gray-500 block">Locarno - 20/08/2025</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="font-semibold">€56.00</span>
+                                    <button onclick="deleteOrder('order-2')" class="text-red-500 hover:text-red-700 font-bold text-xl">×</button>
+                                </div>
                             </div>
-                            <span class="text-sm text-gray-500">Locarno - 20/08/2025</span>
                         </div>
                     </div>
                 </div>
@@ -208,10 +218,13 @@
                     <div class="mt-8">
                         <h3 class="font-semibold mb-4">Storico Utilizzi</h3>
                         <div id="usageHistory" class="space-y-2">
-                            <div class="p-3 bg-gray-50 rounded">
-                                <div class="flex justify-between">
-                                    <span class="text-sm font-medium">20/08/2025</span>
-                                    <span class="text-sm">Totale bowl: 145</span>
+                            <div class="p-3 bg-gray-50 rounded" id="usage-1">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <span class="text-sm font-medium">20/08/2025</span>
+                                        <span class="text-sm ml-3">Totale bowl: 145</span>
+                                    </div>
+                                    <button onclick="deleteUsage('usage-1')" class="text-red-500 hover:text-red-700 font-bold text-xl">×</button>
                                 </div>
                             </div>
                         </div>
@@ -288,12 +301,28 @@
                             <li>• Considera ordini consolidati per ridurre costi</li>
                         </ul>
                     </div>
+                    
+                    <div class="mt-6 p-4 bg-red-50 rounded-lg border border-red-200">
+                        <h3 class="font-semibold text-red-800 mb-3">⚠️ Gestione Dati</h3>
+                        <div class="flex space-x-4">
+                            <button onclick="clearAllOrders()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                                Elimina Tutti Ordini
+                            </button>
+                            <button onclick="clearAllUsage()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                                Elimina Tutti Utilizzi
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
 
     <script>
+        // Counter for unique IDs
+        let orderCounter = 3;
+        let usageCounter = 2;
+
         // Initialize date
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date();
@@ -359,14 +388,20 @@
             
             const total = (qty * price).toFixed(2);
             const date = document.getElementById('orderDate').value;
+            const orderId = 'order-' + orderCounter++;
             
             const orderHtml = `
-                <div class="p-3 bg-gray-50 rounded">
-                    <div class="flex justify-between">
-                        <span class="font-medium">${supplier} - ${product} ${qty}${unit}</span>
-                        <span class="font-semibold">€${total}</span>
+                <div class="p-3 bg-gray-50 rounded" id="${orderId}">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="font-medium">${supplier} - ${product} ${qty}${unit}</span>
+                            <span class="text-sm text-gray-500 block">${store} - ${date}</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="font-semibold">€${total}</span>
+                            <button onclick="deleteOrder('${orderId}')" class="text-red-500 hover:text-red-700 font-bold text-xl">×</button>
+                        </div>
                     </div>
-                    <span class="text-sm text-gray-500">${store} - ${date}</span>
                 </div>
             `;
             
@@ -383,7 +418,38 @@
             const currentOrders = parseInt(document.getElementById('totalOrders').textContent);
             document.getElementById('totalOrders').textContent = currentOrders + 1;
             
+            // Update today orders count if it's today's order
+            const today = new Date().toISOString().split('T')[0];
+            if (date === today) {
+                const todayOrders = parseInt(document.getElementById('todayOrders').textContent);
+                document.getElementById('todayOrders').textContent = todayOrders + 1;
+            }
+            
             alert('Ordine registrato con successo!');
+        }
+
+        // Delete order
+        function deleteOrder(orderId) {
+            if (confirm('Vuoi eliminare questo ordine?')) {
+                const element = document.getElementById(orderId);
+                if (element) {
+                    element.remove();
+                    
+                    // Update orders count
+                    const currentOrders = parseInt(document.getElementById('totalOrders').textContent);
+                    document.getElementById('totalOrders').textContent = Math.max(0, currentOrders - 1);
+                    
+                    // Update today orders count if it's today's order
+                    const orderDate = element.querySelector('.text-gray-500').textContent;
+                    const today = new Date().toLocaleDateString('it-IT');
+                    if (orderDate.includes(today)) {
+                        const todayOrders = parseInt(document.getElementById('todayOrders').textContent);
+                        document.getElementById('todayOrders').textContent = Math.max(0, todayOrders - 1);
+                    }
+                    
+                    alert('Ordine eliminato!');
+                }
+            }
         }
 
         // Save usage
@@ -393,12 +459,16 @@
             const large = document.getElementById('bowlLarge').value;
             const total = parseInt(kids) + parseInt(regular) + parseInt(large);
             const today = new Date().toLocaleDateString('it-IT');
+            const usageId = 'usage-' + usageCounter++;
             
             const usageHtml = `
-                <div class="p-3 bg-gray-50 rounded">
-                    <div class="flex justify-between">
-                        <span class="text-sm font-medium">${today}</span>
-                        <span class="text-sm">Totale bowl: ${total}</span>
+                <div class="p-3 bg-gray-50 rounded" id="${usageId}">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="text-sm font-medium">${today}</span>
+                            <span class="text-sm ml-3">Totale bowl: ${total}</span>
+                        </div>
+                        <button onclick="deleteUsage('${usageId}')" class="text-red-500 hover:text-red-700 font-bold text-xl">×</button>
                     </div>
                 </div>
             `;
@@ -411,6 +481,37 @@
             document.getElementById('bowlLarge').value = '0';
             
             alert('Utilizzo registrato!');
+        }
+
+        // Delete usage
+        function deleteUsage(usageId) {
+            if (confirm('Vuoi eliminare questo utilizzo?')) {
+                const element = document.getElementById(usageId);
+                if (element) {
+                    element.remove();
+                    alert('Utilizzo eliminato!');
+                }
+            }
+        }
+
+        // Clear all orders
+        function clearAllOrders() {
+            if (confirm('⚠️ ATTENZIONE: Vuoi eliminare TUTTI gli ordini? Questa azione non può essere annullata!')) {
+                document.getElementById('ordersList').innerHTML = '';
+                document.getElementById('totalOrders').textContent = '0';
+                document.getElementById('todayOrders').textContent = '0';
+                orderCounter = 1;
+                alert('Tutti gli ordini sono stati eliminati!');
+            }
+        }
+
+        // Clear all usage
+        function clearAllUsage() {
+            if (confirm('⚠️ ATTENZIONE: Vuoi eliminare TUTTI gli utilizzi? Questa azione non può essere annullata!')) {
+                document.getElementById('usageHistory').innerHTML = '';
+                usageCounter = 1;
+                alert('Tutti gli utilizzi sono stati eliminati!');
+            }
         }
 
         // Store change
