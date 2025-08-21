@@ -90,11 +90,11 @@
                     </div>
                     <div class="bg-white rounded-lg shadow p-6">
                         <p class="text-sm text-gray-600">Ordini Oggi</p>
-                        <p class="text-2xl font-bold text-green-600" id="todayOrders">3</p>
+                        <p class="text-2xl font-bold text-green-600" id="todayOrders">0</p>
                     </div>
                     <div class="bg-white rounded-lg shadow p-6">
                         <p class="text-sm text-gray-600">Totale Ordini</p>
-                        <p class="text-2xl font-bold text-orange-600" id="totalOrders">12</p>
+                        <p class="text-2xl font-bold text-orange-600" id="totalOrders">0</p>
                     </div>
                     <div class="bg-white rounded-lg shadow p-6">
                         <p class="text-sm text-gray-600">Store Attivo</p>
@@ -119,6 +119,9 @@
                             <option>Lugano</option>
                             <option>Locarno</option>
                             <option>Grancia</option>
+                            <option>Mendrisio</option>
+                            <option>Lido</option>
+                            <option>Lugano centro</option>
                         </select>
                         
                         <select id="orderSupplier" class="px-3 py-2 border rounded-lg">
@@ -142,7 +145,7 @@
                             <input type="number" id="productQty" class="w-full px-3 py-2 border rounded-lg" value="1">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Prezzo €</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Prezzo CHF</label>
                             <input type="number" id="productPrice" class="w-full px-3 py-2 border rounded-lg" step="0.01" value="0">
                         </div>
                         <div>
@@ -212,15 +215,15 @@
                             <div class="space-y-2 text-sm">
                                 <div class="flex justify-between">
                                     <span>Food Cost:</span>
-                                    <span class="font-semibold text-green-600">28.5%</span>
+                                    <span class="font-semibold text-green-600">0.0%</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Costi:</span>
-                                    <span>€4,275</span>
+                                    <span>CHF 0</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Ricavi:</span>
-                                    <span>€15,000</span>
+                                    <span>CHF 0</span>
                                 </div>
                             </div>
                         </div>
@@ -230,15 +233,15 @@
                             <div class="space-y-2 text-sm">
                                 <div class="flex justify-between">
                                     <span>Food Cost:</span>
-                                    <span class="font-semibold text-green-600">31.2%</span>
+                                    <span class="font-semibold text-green-600">0.0%</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Costi:</span>
-                                    <span>€3,900</span>
+                                    <span>CHF 0</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Ricavi:</span>
-                                    <span>€12,500</span>
+                                    <span>CHF 0</span>
                                 </div>
                             </div>
                         </div>
@@ -248,15 +251,15 @@
                             <div class="space-y-2 text-sm">
                                 <div class="flex justify-between">
                                     <span>Food Cost:</span>
-                                    <span class="font-semibold text-red-600">36.8%</span>
+                                    <span class="font-semibold text-green-600">0.0%</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Costi:</span>
-                                    <span>€4,050</span>
+                                    <span>CHF 0</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Ricavi:</span>
-                                    <span>€11,000</span>
+                                    <span>CHF 0</span>
                                 </div>
                             </div>
                         </div>
@@ -266,15 +269,15 @@
                             <div class="space-y-2 text-sm">
                                 <div class="flex justify-between">
                                     <span>Food Cost:</span>
-                                    <span class="font-semibold text-green-600">29.8%</span>
+                                    <span class="font-semibold text-green-600">0.0%</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Costi:</span>
-                                    <span>€3,725</span>
+                                    <span>CHF 0</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Ricavi:</span>
-                                    <span>€12,500</span>
+                                    <span>CHF 0</span>
                                 </div>
                             </div>
                         </div>
@@ -284,15 +287,15 @@
                             <div class="space-y-2 text-sm">
                                 <div class="flex justify-between">
                                     <span>Food Cost:</span>
-                                    <span class="font-semibold text-green-600">33.5%</span>
+                                    <span class="font-semibold text-green-600">0.0%</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Costi:</span>
-                                    <span>€4,020</span>
+                                    <span>CHF 0</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Ricavi:</span>
-                                    <span>€12,000</span>
+                                    <span>CHF 0</span>
                                 </div>
                             </div>
                         </div>
@@ -302,15 +305,15 @@
                             <div class="space-y-2 text-sm">
                                 <div class="flex justify-between">
                                     <span>Food Cost:</span>
-                                    <span class="font-semibold text-yellow-600">34.9%</span>
+                                    <span class="font-semibold text-green-600">0.0%</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Costi:</span>
-                                    <span>€4,887</span>
+                                    <span>CHF 0</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Ricavi:</span>
-                                    <span>€14,000</span>
+                                    <span>CHF 0</span>
                                 </div>
                             </div>
                         </div>
@@ -320,9 +323,9 @@
                         <h3 class="font-semibold text-blue-800 mb-2">📊 Suggerimenti</h3>
                         <ul class="text-sm text-blue-700 space-y-1">
                             <li>• Obiettivo food cost: mantenere sotto il 35%</li>
-                            <li>• Grancia necessita ottimizzazione urgente (36.8%)</li>
-                            <li>• Lugano centro è al limite (34.9%)</li>
-                            <li>• Considera ordini consolidati per ridurre costi</li>
+                            <li>• Monitora ordini giornalieri per ottimizzare gli acquisti</li>
+                            <li>• Consolida i trasferimenti per ridurre costi</li>
+                            <li>• Controlla regolarmente l'utilizzo per ridurre gli sprechi</li>
                         </ul>
                     </div>
                     
@@ -386,7 +389,7 @@
             const totalOrders = parseInt(document.getElementById('totalOrders').textContent) || 0;
             // Simulate food cost calculation (simplified)
             const baseCost = totalOrders * 150; // Average order value
-            const revenue = 15000; // Fixed revenue for demo
+            const revenue = 0; // Start with 0 revenue
             const percentage = revenue > 0 ? ((baseCost / revenue) * 100).toFixed(1) : 0;
             document.getElementById('foodCostPercent').textContent = percentage + '%';
         }
@@ -479,7 +482,7 @@
                             <span class="text-sm text-gray-500 block">${store} - ${date}</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <span class="font-semibold">€${total}</span>
+                            <span class="font-semibold">CHF ${total}</span>
                             <button onclick="deleteOrder('${orderId}')" class="text-red-500 hover:text-red-700 font-bold text-xl">×</button>
                         </div>
                     </div>
