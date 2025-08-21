@@ -86,7 +86,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                     <div class="bg-white rounded-lg shadow p-6">
                         <p class="text-sm text-gray-600">Food Cost %</p>
-                        <p class="text-2xl font-bold text-blue-600" id="foodCostPercent">28.5%</p>
+                        <p class="text-2xl font-bold text-blue-600" id="foodCostPercent">0.0%</p>
                     </div>
                     <div class="bg-white rounded-lg shadow p-6">
                         <p class="text-sm text-gray-600">Ordini Oggi</p>
@@ -163,30 +163,7 @@
                 <div class="bg-white rounded-lg shadow p-6">
                     <h2 class="text-xl font-bold mb-4">Ordini Recenti</h2>
                     <div id="ordersList" class="space-y-2">
-                        <div class="p-3 bg-gray-50 rounded" id="order-1">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <span class="font-medium">BIANCHI - Pollo 10kg</span>
-                                    <span class="text-sm text-gray-500 block">Lugano - 21/08/2025</span>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <span class="font-semibold">€125.00</span>
-                                    <button onclick="deleteOrder('order-1')" class="text-red-500 hover:text-red-700 font-bold text-xl">×</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-3 bg-gray-50 rounded" id="order-2">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <span class="font-medium">FOODEX - Riso 20kg</span>
-                                    <span class="text-sm text-gray-500 block">Locarno - 20/08/2025</span>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <span class="font-semibold">€56.00</span>
-                                    <button onclick="deleteOrder('order-2')" class="text-red-500 hover:text-red-700 font-bold text-xl">×</button>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Gli ordini salvati verranno caricati qui -->
                     </div>
                 </div>
             </div>
@@ -218,15 +195,7 @@
                     <div class="mt-8">
                         <h3 class="font-semibold mb-4">Storico Utilizzi</h3>
                         <div id="usageHistory" class="space-y-2">
-                            <div class="p-3 bg-gray-50 rounded" id="usage-1">
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <span class="text-sm font-medium">20/08/2025</span>
-                                        <span class="text-sm ml-3">Totale bowl: 145</span>
-                                    </div>
-                                    <button onclick="deleteUsage('usage-1')" class="text-red-500 hover:text-red-700 font-bold text-xl">×</button>
-                                </div>
-                            </div>
+                            <!-- Gli utilizzi salvati verranno caricati qui -->
                         </div>
                     </div>
                 </div>
@@ -320,14 +289,70 @@
 
     <script>
         // Counter for unique IDs
-        let orderCounter = 3;
-        let usageCounter = 2;
+        let orderCounter = parseInt(localStorage.getItem('orderCounter')) || 1;
+        let usageCounter = parseInt(localStorage.getItem('usageCounter')) || 1;
 
-        // Initialize date
+        // Load saved data
+        function loadSavedData() {
+            // Load orders
+            const savedOrders = localStorage.getItem('orders');
+            if (savedOrders) {
+                document.getElementById('ordersList').innerHTML = savedOrders;
+            }
+            
+            // Load usage history
+            const savedUsage = localStorage.getItem('usageHistory');
+            if (savedUsage) {
+                document.getElementById('usageHistory').innerHTML = savedUsage;
+            }
+            
+            // Load counters
+            const totalOrders = localStorage.getItem('totalOrders') || '0';
+            const todayOrders = localStorage.getItem('todayOrders') || '0';
+            document.getElementById('totalOrders').textContent = totalOrders;
+            document.getElementById('todayOrders').textContent = todayOrders;
+            
+            // Update food cost
+            updateFoodCost();
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('orders', document.getElementById('ordersList').innerHTML);
+            localStorage.setItem('usageHistory', document.getElementById('usageHistory').innerHTML);
+            localStorage.setItem('totalOrders', document.getElementById('totalOrders').textContent);
+            localStorage.setItem('todayOrders', document.getElementById('todayOrders').textContent);
+            localStorage.setItem('orderCounter', orderCounter);
+            localStorage.setItem('usageCounter', usageCounter);
+        }
+
+        // Update food cost calculation
+        function updateFoodCost() {
+            const totalOrders = parseInt(document.getElementById('totalOrders').textContent) || 0;
+            // Simulate food cost calculation (simplified)
+            const baseCost = totalOrders * 150; // Average order value
+            const revenue = 15000; // Fixed revenue for demo
+            const percentage = revenue > 0 ? ((baseCost / revenue) * 100).toFixed(1) : 0;
+            document.getElementById('foodCostPercent').textContent = percentage + '%';
+        }
+
+        // Initialize date and load data
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date();
             document.getElementById('currentDate').textContent = today.toLocaleDateString('it-IT');
             document.getElementById('orderDate').valueAsDate = today;
+            
+            // Check if it's a new day and reset today's orders
+            const lastVisit = localStorage.getItem('lastVisitDate');
+            const todayStr = today.toISOString().split('T')[0];
+            if (lastVisit !== todayStr) {
+                localStorage.setItem('todayOrders', '0');
+                localStorage.setItem('lastVisitDate', todayStr);
+                document.getElementById('todayOrders').textContent = '0';
+            }
+            
+            // Load saved data
+            loadSavedData();
         });
 
         // Login function
@@ -339,6 +364,7 @@
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('mainApp').classList.remove('hidden');
                 document.getElementById('currentUser').textContent = username;
+                loadSavedData(); // Reload data after login
             } else {
                 alert('Credenziali errate!');
             }
@@ -425,6 +451,8 @@
                 document.getElementById('todayOrders').textContent = todayOrders + 1;
             }
             
+            updateFoodCost();
+            saveData(); // Save after adding
             alert('Ordine registrato con successo!');
         }
 
@@ -447,6 +475,8 @@
                         document.getElementById('todayOrders').textContent = Math.max(0, todayOrders - 1);
                     }
                     
+                    updateFoodCost();
+                    saveData(); // Save after deleting
                     alert('Ordine eliminato!');
                 }
             }
@@ -480,6 +510,7 @@
             document.getElementById('bowlRegular').value = '0';
             document.getElementById('bowlLarge').value = '0';
             
+            saveData(); // Save after adding usage
             alert('Utilizzo registrato!');
         }
 
@@ -489,6 +520,7 @@
                 const element = document.getElementById(usageId);
                 if (element) {
                     element.remove();
+                    saveData(); // Save after deleting
                     alert('Utilizzo eliminato!');
                 }
             }
@@ -501,6 +533,9 @@
                 document.getElementById('totalOrders').textContent = '0';
                 document.getElementById('todayOrders').textContent = '0';
                 orderCounter = 1;
+                updateFoodCost();
+                saveData(); // Save after clearing
+                localStorage.removeItem('orders'); // Clear from storage
                 alert('Tutti gli ordini sono stati eliminati!');
             }
         }
@@ -510,6 +545,8 @@
             if (confirm('⚠️ ATTENZIONE: Vuoi eliminare TUTTI gli utilizzi? Questa azione non può essere annullata!')) {
                 document.getElementById('usageHistory').innerHTML = '';
                 usageCounter = 1;
+                saveData(); // Save after clearing
+                localStorage.removeItem('usageHistory'); // Clear from storage
                 alert('Tutti gli utilizzi sono stati eliminati!');
             }
         }
