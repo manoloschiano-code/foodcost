@@ -209,112 +209,36 @@
                 <div class="bg-white rounded-lg shadow p-6">
                     <h2 class="text-xl font-bold mb-6">Report Food Cost</h2>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="border rounded-lg p-4">
-                            <h3 class="font-semibold mb-3">Lugano</h3>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between">
-                                    <span>Food Cost:</span>
-                                    <span class="font-semibold text-green-600">0.0%</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Costi:</span>
-                                    <span>CHF 0</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Ricavi:</span>
-                                    <span>CHF 0</span>
-                                </div>
+                    <div id="storeReports" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- I report verranno generati dinamicamente qui -->
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+                        <h3 class="font-semibold text-green-800 mb-3">💰 Inserisci Ricavi Mensili</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <div>
+                                <label class="text-xs text-gray-600">Lugano</label>
+                                <input type="number" id="revenue-Lugano" placeholder="CHF" class="w-full px-2 py-1 border rounded" onchange="updateStoreRevenue('Lugano', this.value)">
                             </div>
-                        </div>
-                        
-                        <div class="border rounded-lg p-4">
-                            <h3 class="font-semibold mb-3">Locarno</h3>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between">
-                                    <span>Food Cost:</span>
-                                    <span class="font-semibold text-green-600">0.0%</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Costi:</span>
-                                    <span>CHF 0</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Ricavi:</span>
-                                    <span>CHF 0</span>
-                                </div>
+                            <div>
+                                <label class="text-xs text-gray-600">Locarno</label>
+                                <input type="number" id="revenue-Locarno" placeholder="CHF" class="w-full px-2 py-1 border rounded" onchange="updateStoreRevenue('Locarno', this.value)">
                             </div>
-                        </div>
-                        
-                        <div class="border rounded-lg p-4">
-                            <h3 class="font-semibold mb-3">Grancia</h3>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between">
-                                    <span>Food Cost:</span>
-                                    <span class="font-semibold text-green-600">0.0%</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Costi:</span>
-                                    <span>CHF 0</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Ricavi:</span>
-                                    <span>CHF 0</span>
-                                </div>
+                            <div>
+                                <label class="text-xs text-gray-600">Grancia</label>
+                                <input type="number" id="revenue-Grancia" placeholder="CHF" class="w-full px-2 py-1 border rounded" onchange="updateStoreRevenue('Grancia', this.value)">
                             </div>
-                        </div>
-                        
-                        <div class="border rounded-lg p-4">
-                            <h3 class="font-semibold mb-3">Mendrisio</h3>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between">
-                                    <span>Food Cost:</span>
-                                    <span class="font-semibold text-green-600">0.0%</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Costi:</span>
-                                    <span>CHF 0</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Ricavi:</span>
-                                    <span>CHF 0</span>
-                                </div>
+                            <div>
+                                <label class="text-xs text-gray-600">Mendrisio</label>
+                                <input type="number" id="revenue-Mendrisio" placeholder="CHF" class="w-full px-2 py-1 border rounded" onchange="updateStoreRevenue('Mendrisio', this.value)">
                             </div>
-                        </div>
-                        
-                        <div class="border rounded-lg p-4">
-                            <h3 class="font-semibold mb-3">Lido</h3>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between">
-                                    <span>Food Cost:</span>
-                                    <span class="font-semibold text-green-600">0.0%</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Costi:</span>
-                                    <span>CHF 0</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Ricavi:</span>
-                                    <span>CHF 0</span>
-                                </div>
+                            <div>
+                                <label class="text-xs text-gray-600">Lido</label>
+                                <input type="number" id="revenue-Lido" placeholder="CHF" class="w-full px-2 py-1 border rounded" onchange="updateStoreRevenue('Lido', this.value)">
                             </div>
-                        </div>
-                        
-                        <div class="border rounded-lg p-4">
-                            <h3 class="font-semibold mb-3">Lugano centro</h3>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between">
-                                    <span>Food Cost:</span>
-                                    <span class="font-semibold text-green-600">0.0%</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Costi:</span>
-                                    <span>CHF 0</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Ricavi:</span>
-                                    <span>CHF 0</span>
-                                </div>
+                            <div>
+                                <label class="text-xs text-gray-600">Lugano centro</label>
+                                <input type="number" id="revenue-Lugano centro" placeholder="CHF" class="w-full px-2 py-1 border rounded" onchange="updateStoreRevenue('Lugano centro', this.value)">
                             </div>
                         </div>
                     </div>
@@ -323,8 +247,8 @@
                         <h3 class="font-semibold text-blue-800 mb-2">📊 Suggerimenti</h3>
                         <ul class="text-sm text-blue-700 space-y-1">
                             <li>• Obiettivo food cost: mantenere sotto il 35%</li>
-                            <li>• Monitora ordini giornalieri per ottimizzare gli acquisti</li>
-                            <li>• Consolida i trasferimenti per ridurre costi</li>
+                            <li>• Inserisci i ricavi mensili per calcolare il food cost %</li>
+                            <li>• Il sistema calcola automaticamente basandosi sugli ordini registrati</li>
                             <li>• Controlla regolarmente l'utilizzo per ridurre gli sprechi</li>
                         </ul>
                     </div>
@@ -349,6 +273,16 @@
         // Counter for unique IDs
         let orderCounter = parseInt(localStorage.getItem('orderCounter')) || 1;
         let usageCounter = parseInt(localStorage.getItem('usageCounter')) || 1;
+        
+        // Store revenues
+        let storeRevenues = JSON.parse(localStorage.getItem('storeRevenues')) || {
+            'Lugano': 0,
+            'Locarno': 0,
+            'Grancia': 0,
+            'Mendrisio': 0,
+            'Lido': 0,
+            'Lugano centro': 0
+        };
 
         // Load saved data
         function loadSavedData() {
@@ -370,8 +304,22 @@
             document.getElementById('totalOrders').textContent = totalOrders;
             document.getElementById('todayOrders').textContent = todayOrders;
             
-            // Update food cost
+            // Load store revenues
+            const savedRevenues = localStorage.getItem('storeRevenues');
+            if (savedRevenues) {
+                storeRevenues = JSON.parse(savedRevenues);
+                // Update revenue inputs
+                Object.keys(storeRevenues).forEach(store => {
+                    const input = document.getElementById(`revenue-${store}`);
+                    if (input && storeRevenues[store] > 0) {
+                        input.value = storeRevenues[store];
+                    }
+                });
+            }
+            
+            // Update food cost and reports
             updateFoodCost();
+            updateAllStoreReports();
         }
 
         // Save data to localStorage
@@ -382,15 +330,89 @@
             localStorage.setItem('todayOrders', document.getElementById('todayOrders').textContent);
             localStorage.setItem('orderCounter', orderCounter);
             localStorage.setItem('usageCounter', usageCounter);
+            localStorage.setItem('storeRevenues', JSON.stringify(storeRevenues));
         }
 
-        // Update food cost calculation
+        // Calculate store costs from orders
+        function calculateStoreCosts(storeName) {
+            const orderElements = document.querySelectorAll('#ordersList > div');
+            let totalCost = 0;
+            
+            orderElements.forEach(orderEl => {
+                const storeText = orderEl.querySelector('.text-gray-500');
+                if (storeText && storeText.textContent.includes(storeName)) {
+                    const costText = orderEl.querySelector('.font-semibold');
+                    if (costText) {
+                        const cost = parseFloat(costText.textContent.replace('CHF ', '').replace(',', ''));
+                        if (!isNaN(cost)) {
+                            totalCost += cost;
+                        }
+                    }
+                }
+            });
+            
+            return totalCost;
+        }
+
+        // Update store revenue
+        function updateStoreRevenue(store, value) {
+            storeRevenues[store] = parseFloat(value) || 0;
+            saveData();
+            updateAllStoreReports();
+        }
+
+        // Update all store reports
+        function updateAllStoreReports() {
+            const stores = ['Lugano', 'Locarno', 'Grancia', 'Mendrisio', 'Lido', 'Lugano centro'];
+            const reportsContainer = document.getElementById('storeReports');
+            
+            if (!reportsContainer) return;
+            
+            let reportsHTML = '';
+            
+            stores.forEach(store => {
+                const costs = calculateStoreCosts(store);
+                const revenue = storeRevenues[store] || 0;
+                const foodCostPercent = revenue > 0 ? ((costs / revenue) * 100).toFixed(1) : 0;
+                
+                // Determine color based on percentage
+                let colorClass = 'text-green-600';
+                if (foodCostPercent > 35) {
+                    colorClass = 'text-red-600';
+                } else if (foodCostPercent > 33) {
+                    colorClass = 'text-yellow-600';
+                }
+                
+                reportsHTML += `
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-3">${store}</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span>Food Cost:</span>
+                                <span class="font-semibold ${colorClass}">${foodCostPercent}%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Costi:</span>
+                                <span>CHF ${costs.toFixed(2)}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Ricavi:</span>
+                                <span>CHF ${revenue.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            reportsContainer.innerHTML = reportsHTML;
+        }
+
+        // Update food cost calculation for current store
         function updateFoodCost() {
-            const totalOrders = parseInt(document.getElementById('totalOrders').textContent) || 0;
-            // Simulate food cost calculation (simplified)
-            const baseCost = totalOrders * 150; // Average order value
-            const revenue = 0; // Start with 0 revenue
-            const percentage = revenue > 0 ? ((baseCost / revenue) * 100).toFixed(1) : 0;
+            const currentStore = document.getElementById('activeStore').textContent;
+            const costs = calculateStoreCosts(currentStore);
+            const revenue = storeRevenues[currentStore] || 0;
+            const percentage = revenue > 0 ? ((costs / revenue) * 100).toFixed(1) : 0;
             document.getElementById('foodCostPercent').textContent = percentage + '%';
         }
 
@@ -454,6 +476,11 @@
             
             event.target.classList.remove('border-transparent', 'text-gray-500');
             event.target.classList.add('border-blue-500', 'text-blue-600');
+            
+            // Update reports when showing reports tab
+            if (tabName === 'reports') {
+                updateAllStoreReports();
+            }
         }
 
         // Add order
@@ -510,6 +537,7 @@
             }
             
             updateFoodCost();
+            updateAllStoreReports();
             saveData(); // Save after adding
             alert('Ordine registrato con successo!');
         }
@@ -534,6 +562,7 @@
                     }
                     
                     updateFoodCost();
+                    updateAllStoreReports();
                     saveData(); // Save after deleting
                     alert('Ordine eliminato!');
                 }
@@ -592,6 +621,7 @@
                 document.getElementById('todayOrders').textContent = '0';
                 orderCounter = 1;
                 updateFoodCost();
+                updateAllStoreReports();
                 saveData(); // Save after clearing
                 localStorage.removeItem('orders'); // Clear from storage
                 alert('Tutti gli ordini sono stati eliminati!');
@@ -612,6 +642,7 @@
         // Store change
         document.getElementById('storeSelect').addEventListener('change', function() {
             document.getElementById('activeStore').textContent = this.value;
+            updateFoodCost(); // Update food cost for the selected store
         });
     </script>
 </body>
